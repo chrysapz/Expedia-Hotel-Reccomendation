@@ -2,7 +2,7 @@
 
 ## Running the code
 
-```angular2html
+```
 # clone the repo, cd into the new dir
 # first install mamba, a better version of conda (assuming you have anaconda or miniconda installed)
 conda install mamba
