@@ -73,8 +73,8 @@ def plot_correlation(df):
 
 
 if __name__ == "__main__":
-    df_test = load_data("test_set_VU_DM.csv")
-    df = load_data("training_set_VU_DM.csv")
+    df_test = load_data("data/test_set_VU_DM.csv")
+    df = load_data("data/training_set_VU_DM.csv")
     print("Exploration of training set: \n")
     explore_data(df)
 

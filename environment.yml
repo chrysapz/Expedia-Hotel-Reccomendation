@@ -1,0 +1,22 @@
+name: dmt_expedia
+channels:
+  - conda-forge
+  #- defaults
+
+dependencies:
+  - python>=3.9
+  - jupyterlab
+  - ipywidgets
+  - tqdm
+  # Core scientific python
+  - numpy
+  - pandas
+  # Plotting
+  - matplotlib
+  - seaborn
+  # ML
+  - scikit-learn
+  # Example of how to add pip dependencies
+#  - pip=21.2.4
+#  - pip:
+#    - torchmetrics==0.9.0
