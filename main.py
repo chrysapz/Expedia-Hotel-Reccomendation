@@ -6,6 +6,10 @@ import gc
 
 import pandas
 import numpy as np
+from matplotlib import pyplot as plt
+import numpy as np
+#import seaborn as sns
+#from sklearn import metrics
 
 
 
@@ -16,7 +20,7 @@ def load_data(file_path):
     print("Finished loading data....")
     return df
 
-def explore_data(df):
+def explore_data(df, train=1):
     print("Exectuting df.head() ...")
     print(df.head())
 
@@ -52,31 +56,28 @@ def explore_data(df):
     total_missing_values = missing_values.sum()
     print("\nTotal Missing Values in Dataset:", total_missing_values)
 
+    print("Feature types: ")
+    print(df.dtypes)
+
+    if train == 1:
+        print("Actual bookings in train: ", df.loc[(df.booking_bool == 1)].shape[0])
+        print("Clicks: ", df.loc[(df.click_bool == 1)].shape[0])
+        print("Chance of booking: ", df.loc[(df.booking_bool == 1)].shape[0] / df[df.booking_bool.notnull()].shape[0] * 100, '%')
+    
+
     return 
 
-def plot(df):
+
+def plot_correlation(df):
     pass
 
-if __name__ == "__main__":
-    '''parser = argparse.ArgumentParser("Trains the model and outputs the prediction.")
-    parser.add_argument(
-        "training_set_VU_DM" )
-    parser.add_argumnt(
-        "test_set_VU_DM",
-    )
-    parser.add_argument(
-        "output",
-    )
-    args = parser.parse_args()
-    train_csv = args.train_csv
-    test_csv = args.test_csv
-    output_dir = args.output_dir'''
 
+if __name__ == "__main__":
     df_test = load_data("test_set_VU_DM.csv")
     df = load_data("training_set_VU_DM.csv")
     print("Exploration of training set: \n")
     explore_data(df)
 
     print("#################### \n ################### \n")
-    print("Exploration of test set: \n")
-    explore_data(df_test)
+    #print("Exploration of test set: \n")
+    #explore_data(df_test,train = 0)
