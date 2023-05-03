@@ -147,6 +147,34 @@ def preprocess(df):
     print(df[['prop_id', 'comp_rate_sum', 'comp_inv_sum', 'comp_diff_aggr']].head())
 
 
+def position_bias_plots(df):
+
+    # Position x booking
+    booked_count_by_position = df[df['booking_bool'] == 1].groupby('position')['booking_bool'].count()
+
+    plt.figure(figsize=(12, 6))
+    booked_count_by_position.plot(kind='bar')
+
+    plt.xlabel('Position')
+    plt.ylabel('Count of Booked Hotels')
+    plt.title('Positions vs. Count of Booked Hotels')
+
+    plt.show()
+
+    # Position x clicked
+    clicked_count_by_position = df[df['click_bool'] == 1].groupby('position')['click_bool'].count()
+
+    plt.figure(figsize=(12, 6))
+    clicked_count_by_position.plot(kind='bar')
+
+    plt.xlabel('Position')
+    plt.ylabel('Count of Clicked Hotels')
+    plt.title('Positions vs. Count of Clicked Hotels')
+
+    plt.show()
+    
+
+
 if __name__ == "__main__":
     #df_test = load_data("data/test_set_VU_DM.csv")
     df = load_data("data/training_set_VU_DM.csv")
@@ -159,6 +187,8 @@ if __name__ == "__main__":
     #explore_data(df_test,train = 0)
 
     print(pd.crosstab(df['click_bool'], df['booking_bool']))
+
+    
     
     preprocess(df)
 
