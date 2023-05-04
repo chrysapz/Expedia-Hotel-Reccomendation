@@ -1,0 +1,53 @@
+"""
+@author: Stelios_Ntanavaras
+"""
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+# Read the dataset
+data = pd.read_csv("training_set_VU_DM.csv")
+print(data)
+
+
+# Get an overview of the dataset
+print(data.info())
+
+
+# General statistics of data
+statistics = data.describe()
+print(statistics)
+
+
+# Calculate the proportion of missing values for each attribute
+missing_proportions = data.isnull().mean()
+
+
+# Plot the proportion of missing values for each attribute
+plt.figure(figsize=(12, 6))
+plt.bar(missing_proportions.index, missing_proportions)
+plt.xlabel('Attributes')
+plt.ylabel('Proportion of Missing Values')
+plt.title('Proportion of Missing Values for Each Attribute')
+plt.xticks(rotation=90)  # Rotate x-axis labels if needed
+plt.show()
+
+
+# Box plot of attributes
+attributes = ['price_usd', 'gross_bookings_usd', 'visitor_hist_adr_usd']
+transposed_data = data[attributes].transpose()
+
+plt.figure(figsize=(12, 6))
+sns.boxplot(data=transposed_data)
+plt.ylabel('Attributes')
+plt.xlabel('Values')
+plt.title('Boxplots of Attributes')
+plt.show()
+
+
+# Count the frequency of values in a categorical column
+#print(data['column_name'].value_counts())
