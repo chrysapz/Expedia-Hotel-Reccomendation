@@ -18,6 +18,21 @@ print(data)
 print(data.info())
 
 
+# Number of rows
+num_rows = data.shape[0]
+print("Number of rows:", num_rows)
+
+
+# Number of columns
+num_columns = data.shape[1]
+print("Number of columns:", num_columns)
+
+
+# Get the number of unique values for each attribute
+unique_counts = data.nunique()
+print(unique_counts)
+
+
 # General statistics of data
 statistics = data.describe()
 print(statistics)
