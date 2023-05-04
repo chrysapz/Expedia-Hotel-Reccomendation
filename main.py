@@ -109,7 +109,7 @@ def to_boolean(x):
 
 def preprocess(df):
 
-    #Same for these ~1.6 million missing vs
+    #fill with -1 to differentiate between missing and actual ~1.6 million missing vs
     df['orig_destination_distance'] = df['orig_destination_distance'].fillna(-1)
 
     #Remove rows where attribute "prop_review_score" is missing
