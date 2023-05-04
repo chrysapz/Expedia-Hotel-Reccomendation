@@ -109,8 +109,6 @@ def to_boolean(x):
 
 def preprocess(df):
 
-    #Fill ~1m missing values w/ -1 to differentiate between missing score and bad score
-    df['prop_location_score2'] = df['prop_location_score2'].fillna(-1)
     #Same for these ~1.6 million missing vs
     df['orig_destination_distance'] = df['orig_destination_distance'].fillna(-1)
 
