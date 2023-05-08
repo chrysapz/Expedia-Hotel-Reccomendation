@@ -1,5 +1,13 @@
 # Expedia-Hotel-Reccomendation
 
+## Solutions of actual Kaggle winners:
+
+https://github.com/yangminglintw/Personalize-Expedia-Hotel-Searches---ICDM-2013
+
+## Other potentially useful references
+
+https://towardsdatascience.com/time-series-of-price-anomaly-detection-13586cd5ff46
+
 ## Running the code
 
 ```
