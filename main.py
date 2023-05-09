@@ -319,7 +319,7 @@ def train(
     gc.collect()
     early_stopping_callback = early_stopping(stopping_rounds=150, first_metric_only=True)
     log_evaluation_callback = log_evaluation(period=20)
-    print("The features used for training are: {}".format(x_new.columns.values))
+    #print("The features used for training are: {}".format(x_new.columns.values))
     ranker.fit(
         x_new,
         y_new,
