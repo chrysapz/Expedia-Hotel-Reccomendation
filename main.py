@@ -294,6 +294,9 @@ def split(X, y, val_start, val_stop):
     val_groups = x_out["srch_id"].value_counts(sort=False).sort_index()
     #print("Inside split: \n")
     #print(groups)
+    #print(len(groups))
+    #print(val_groups)
+    #print(val_groups.shape)
     #print(y_new)
 
     x_new = x_new.drop(columns = ["srch_id", "prop_id"], axis=1)
@@ -319,11 +322,15 @@ def train(
     gc.collect()
     early_stopping_callback = early_stopping(stopping_rounds=150, first_metric_only=True)
     log_evaluation_callback = log_evaluation(period=20)
+    weighting_function = np.vectorize(lambda x: 5 if x == 2 else 1)
+    weights = weighting_function(y_new)
     #print("The features used for training are: {}".format(x_new.columns.values))
     ranker.fit(
         x_new,
         y_new,
+        sample_weight = weights,
         eval_set=[(x_new, y_new), (x_out, y_out)],
+        eval_names = ["train", "valid"],
         eval_group=[groups, val_groups],
         group=groups,
         eval_at=5,
@@ -343,7 +350,8 @@ def test(X_test, output_dir):
 
     pred_csv_format = X_test[["srch_id", "prop_id"]]
     pred_csv_format["predicted"] = prediction
-    pred_csv_format = pred_csv_format.sort_values(["srch_id", "predicted"], ascending=True)
+
+    pred_csv_format = pred_csv_format.sort_values(["srch_id", "predicted"], ascending=False)
     pred_csv_format[["srch_id", "prop_id"]].to_csv(os.path.join(output_dir, "prediction.csv"), index=False)
 
     print("Saved .csv")
@@ -376,9 +384,9 @@ def run(X, y, output_dir):
         
         gc.collect()
 
-        if i == 0 or (model.best_score_["valid_1"]["ndcg@5"] > best_score):
+        if i == 0 or (model.best_score_["valid"]["ndcg@5"] > best_score):
             name_of_best = name
-            best_score = model.best_score_["valid_1"]['ndcg@5']
+            best_score = model.best_score_["valid"]['ndcg@5']
             pickle.dump(model, open(os.path.join(output_dir, "model.dat"), "wb"))
         
 
