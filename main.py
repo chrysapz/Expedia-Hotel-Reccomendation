@@ -312,7 +312,7 @@ def train(
     ranker = lightgbm.LGBMRanker(
         objective="lambdarank",
         metric="ndcg",
-        n_estimators=1000,#2000,
+        n_estimators=8000,
         learning_rate=lr,
         label_gain=[0, 1, 2],
         random_state=42,
@@ -320,8 +320,8 @@ def train(
     )
 
     gc.collect()
-    early_stopping_callback = early_stopping(stopping_rounds=150, first_metric_only=True)
-    log_evaluation_callback = log_evaluation(period=20)
+    early_stopping_callback = early_stopping(stopping_rounds=250, first_metric_only=True)
+    log_evaluation_callback = log_evaluation(period=50)
     weighting_function = np.vectorize(lambda x: 5 if x == 2 else 1)
     weights = weighting_function(y_new)
     #print("The features used for training are: {}".format(x_new.columns.values))
@@ -350,7 +350,7 @@ def test(X_test, output_dir):
 
     pred_csv_format = X_test[["srch_id", "prop_id"]]
     pred_csv_format["predicted"] = prediction
-    pred_csv_format = pred_csv_format.sort_values("predicted", ascending=False).sort_value("srch_id", kind='stable')
+    pred_csv_format = pred_csv_format..sort_values(["srch_id", "prediction"], ascending=False)
     pred_csv_format[["srch_id", "prop_id"]].to_csv(os.path.join(output_dir, "prediction.csv"), index=False)
 
     print("Saved .csv")
