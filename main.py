@@ -350,8 +350,7 @@ def test(X_test, output_dir):
 
     pred_csv_format = X_test[["srch_id", "prop_id"]]
     pred_csv_format["predicted"] = prediction
-
-    pred_csv_format = pred_csv_format.sort_values(["srch_id", "predicted"], ascending=False)
+    pred_csv_format = pred_csv_format.sort_values("predicted", ascending=False).sort_value("srch_id", kind='stable')
     pred_csv_format[["srch_id", "prop_id"]].to_csv(os.path.join(output_dir, "prediction.csv"), index=False)
 
     print("Saved .csv")
