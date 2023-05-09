@@ -30,7 +30,7 @@ def load_data(file_path):
     #Remove when training as whole
     #df = df.sample(n=1000000, random_state=42)
 
-    print("Finished loading data....")
+    print("--Data Loaded--")
     return df
 
 def explore_data(df, train=1):
@@ -80,9 +80,6 @@ def explore_data(df, train=1):
     return 
 
 
-def normalize(df):
-    pass
-
 
 def plot_distr(df):
     plt.figure(figsize=(16, 8))
@@ -111,7 +108,7 @@ def plot_distr(df):
     plt.show()
 
 def to_boolean(x):
- return True if x==1 else False if x==0 else None
+    return True if x==1 else False if x==0 else None
 
 def preprocess(df, train=True):
     gc.collect()
@@ -378,11 +375,10 @@ def run(X, y, output_dir):
             os.makedirs(output_dir)
         
         gc.collect()
-        
 
-        if i == 0 or model.best_score_[f"valid_{i+1}"]['ndcg@5'] > best_score:
+        if i == 0 or (model.best_score_["valid_1"]["ndcg@5"] > best_score):
             name_of_best = name
-            best_score = model.best_score_[f"valid_{i+1}"]['ndcg@5']
+            best_score = model.best_score_["valid_1"]['ndcg@5']
             pickle.dump(model, open(os.path.join(output_dir, "model.dat"), "wb"))
         
 
@@ -403,7 +399,7 @@ if __name__ == "__main__":
     #print("Exploration of test set: \n")
     #explore_data(df_test,train = 0)
 
-    print(pd.crosstab(df['click_bool'], df['booking_bool']))
+    #print(pd.crosstab(df['click_bool'], df['booking_bool']))
 
     '''df['prop_location_score1'].hist(bins=50)
     plt.xlabel('prop_location_score1')
