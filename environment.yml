@@ -16,6 +16,7 @@ dependencies:
   - seaborn
   # ML
   - scikit-learn
+  - lightgbm
   # Example of how to add pip dependencies
 #  - pip=21.2.4
 #  - pip:
