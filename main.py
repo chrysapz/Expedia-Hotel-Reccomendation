@@ -350,7 +350,9 @@ def test(X_test, output_dir):
 
     pred_csv_format = X_test[["srch_id", "prop_id"]]
     pred_csv_format["predicted"] = prediction
-    pred_csv_format = pred_csv_format..sort_values(["srch_id", "prediction"], ascending=False)
+    pred_csv_format = pred_csv_format.sort_values(["srch_id", "prediction"], ascending=False)
+    #pd.read_csv('output/prediction.csv').sort_index(ascending=False).sort_values('srch_id', kind='stable').to_csv('output/prediction_reversed_order.csv', index=None)
+
     pred_csv_format[["srch_id", "prop_id"]].to_csv(os.path.join(output_dir, "prediction.csv"), index=False)
 
     print("Saved .csv")
@@ -422,9 +424,10 @@ if __name__ == "__main__":
 
     output_dir = "output/"
     
-
-    train_X,train_y = preprocess(df)
-    run(train_X,train_y, output_dir)
+    pd.read_csv('output/prediction.csv').sort_index(ascending=False).sort_values('srch_id', kind='stable').to_csv('output/prediction_reversed_order.csv', index=None)
+    
+    #train_X,train_y = preprocess(df)
+    #run(train_X,train_y, output_dir)
 
     #test_X, test_y = preprocess(df, train=False)
     #plot_distr(df)
