@@ -11,6 +11,7 @@ dependencies:
   # Core scientific python
   - numpy
   - pandas
+  - scipy
   # Plotting
   - matplotlib
   - seaborn
