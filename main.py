@@ -350,7 +350,7 @@ def test(X_test, output_dir):
 
     pred_csv_format = X_test[["srch_id", "prop_id"]]
     pred_csv_format["predicted"] = prediction
-    pred_csv_format = pred_csv_format.sort_values("predicted", ascending=False).sort_value("srch_id", kind='stable')
+    pred_csv_format = pred_csv_format.sort_values("predicted", ascending=False).sort_values("srch_id", kind='stable')
 
     pred_csv_format[["srch_id", "prop_id"]].to_csv(os.path.join(output_dir, "prediction.csv"), index=False)
 
@@ -394,7 +394,7 @@ def run(X, y, output_dir):
     X_test, _ = preprocess(test_data, train=False)
     test(X_test, output_dir)
 
-
+OUTPUT_DIR = "output/"
 
 if __name__ == "__main__":
     #df_test = load_data("data/test_set_VU_DM.csv")
@@ -421,10 +421,8 @@ if __name__ == "__main__":
     plt.title('prop_location_score2')
     plt.show() '''
 
-    output_dir = "output/"
-    
-    train_X,train_y = preprocess(df)
-    run(train_X,train_y, output_dir)
+    train_X, train_y = preprocess(df)
+    run(train_X, train_y, OUTPUT_DIR)
 
     #test_X, test_y = preprocess(df, train=False)
     #plot_distr(df)
