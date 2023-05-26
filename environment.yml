@@ -6,8 +6,10 @@ channels:
 dependencies:
   - python>=3.9
   - jupyterlab
+  - notebook
   - ipywidgets
   - tqdm
+  # - pyarrow # for fast serialization
   # Core scientific python
   - numpy
   - pandas
@@ -18,6 +20,7 @@ dependencies:
   # ML
   - scikit-learn
   - lightgbm
+  - shap # for feature importance
   # Example of how to add pip dependencies
 #  - pip=21.2.4
 #  - pip:
