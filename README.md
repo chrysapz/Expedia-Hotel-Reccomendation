@@ -1,4 +1,5 @@
 # Expedia-Hotel-Reccomendation
+This is our attempt to create accurate hotel recommendations for the Expedia website. 
 
 ## Solutions of actual Kaggle winners:
 
